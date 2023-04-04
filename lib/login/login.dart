@@ -91,7 +91,8 @@ class _LoginPageState extends State<LoginPage> {
                           obscureText: true,
                           onSubmitted: (value) => signIn(context),
                           autofillHints: const [AutofillHints.password],
-                          onEditingComplete: () => TextInput.finishAutofillContext(),
+                          onEditingComplete: () =>
+                              TextInput.finishAutofillContext(),
                           decoration: const InputDecoration(
                             labelText: 'Password',
                           ),
@@ -125,7 +126,9 @@ class _LoginPageState extends State<LoginPage> {
                   try {
                     await FirebaseAuth.instance.sendPasswordResetEmail(
                         email: emailController.text.trim());
+                    // ignore: empty_catches
                   } on FirebaseAuthException {}
+                  // ignore: use_build_context_synchronously
                   showDialog(
                     context: context,
                     builder: (context) {

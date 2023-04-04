@@ -22,23 +22,11 @@ class TeamItem extends StatelessWidget {
 
     return Card(
       child: ListTile(
-        // leading: CircleAvatar(
-        //   backgroundColor: HexColor(faculty.color),
-        //   foregroundColor: Theme.of(context).colorScheme.surfaceVariant,
-        //   child: Padding(
-        //     padding: const EdgeInsets.only(bottom: 1),
-        //     child: Text(
-        //       '$rank',
-        //       textAlign: TextAlign.end,
-        //       style: const TextStyle(fontSize: 20),
-        //     ),
-        //   ),
-        // ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text('$score Punkte'),
-            const Icon(Icons.arrow_right),
+            const Icon(Icons.arrow_right_rounded),
           ],
         ),
         title: Row(
@@ -49,13 +37,12 @@ class TeamItem extends StatelessWidget {
               size: 20,
             ),
             const Padding(
-              padding: EdgeInsets.all(2),
+              padding: EdgeInsets.all(3.5),
             ),
             Text(
               team.name,
               style: const TextStyle(
                 fontSize: 20,
-                // color: HexColor(faculty.color),
               ),
             ),
           ],

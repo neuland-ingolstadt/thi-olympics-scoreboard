@@ -15,19 +15,6 @@ class FacultyItem extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  // String getTotalScore(BuildContext context, Faculty faculty) {
-  //   var teams = Provider.of<List<Team>>(context);
-
-  //   if (teams.isEmpty) {
-  //     return '0';
-  //   }
-
-  //   int total =
-  //       teams.map((e) => e.score).reduce((value, element) => value + element);
-
-  //   return total.toString();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -64,64 +51,3 @@ class FacultyItem extends StatelessWidget {
     );
   }
 }
-
-// class TeamsList extends StatelessWidget {
-//   final Faculty faculty;
-//   const TeamsList({required this.faculty, super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     var teams = Provider.of<List<Team>>(context);
-//     teams = teams.where((e) => e.faculty == faculty.id).toList();
-
-//     return Column(
-//       children: [
-//         ListView.builder(
-//           shrinkWrap: true,
-//           itemCount: teams.length,
-//           itemBuilder: (context, index) {
-//             // var team = teams[index];
-
-//             return TeamsItem(
-//               score: 0,
-//               rank: 0,
-//               team: teams[index],
-//             );
-//           },
-//         ),
-//         const Padding(padding: EdgeInsets.only(bottom: 5))
-//       ],
-//     );
-//   }
-// }
-
-// class TeamsItem extends StatelessWidget {
-//   final Team team;
-//   final int score;
-//   final int rank;
-//   const TeamsItem(
-//       {required this.rank,
-//       required this.team,
-//       super.key,
-//       required,
-//       required this.score});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: const EdgeInsets.only(top: 5),
-//       child: Row(
-//         children: [
-//           Expanded(
-//             child: Text(
-//               team.name,
-//             ),
-//           ),
-//           Text(
-//             '$score Punkte',
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

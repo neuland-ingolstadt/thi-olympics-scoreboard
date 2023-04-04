@@ -40,7 +40,6 @@ class FacultiesScreen extends StatefulWidget {
 }
 
 class _FacultiesScreenState extends State<FacultiesScreen> {
-
   int getFacGameScore(Faculty faculty, Team team) {
     return faculty.scores[team.id] ?? 0;
   }
@@ -72,7 +71,6 @@ class _FacultiesScreenState extends State<FacultiesScreen> {
   //Returns global score for each faculty for the given game of a faculty
   Map<Faculty, int> getFacScore(
       Faculty gameFaculty, List<Faculty> faculties, List<Team> allTeams) {
-
     var facultiesCopy = List.of(faculties);
 
     facultiesCopy.sort(((a, b) => getFacGameAvgScores(gameFaculty, b, allTeams)
@@ -101,9 +99,10 @@ class _FacultiesScreenState extends State<FacultiesScreen> {
     }
 
     for (var element in facultiesCopy) {
-      facRanks[element] =
-          (facultiesCopy.length - (facRanks[element] ?? facultiesCopy.length + 1) + 1) *
-              10;
+      facRanks[element] = (facultiesCopy.length -
+              (facRanks[element] ?? facultiesCopy.length + 1) +
+              1) *
+          10;
 
       // print('${element.name} ${facRanks[element]}');
     }
@@ -147,7 +146,6 @@ class _FacultiesScreenState extends State<FacultiesScreen> {
       if (curScore != prevScore) {
         ++rank;
         prevScore = curScore;
-        // print('$curScore - $rank');
       }
       facRanks[element] = rank;
     }
@@ -157,9 +155,9 @@ class _FacultiesScreenState extends State<FacultiesScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     var faculties = Provider.of<List<Faculty>>(context);
-    faculties = faculties.where((element) => element.id != 'sprecherrat').toList();
+    faculties =
+        faculties.where((element) => element.id != 'sprecherrat').toList();
 
     var teams = Provider.of<List<Team>>(context);
 

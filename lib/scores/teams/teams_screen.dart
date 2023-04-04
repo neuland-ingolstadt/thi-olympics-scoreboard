@@ -61,6 +61,7 @@ class TeamsScreen extends StatelessWidget {
     };
 
     var prevScore = -1;
+    var scoreSkip = 0;
     var rank = 0;
 
     for (var element in globalScores.keys.toList()
@@ -69,10 +70,15 @@ class TeamsScreen extends StatelessWidget {
       var curScore = globalScores[element] ?? 0;
 
       if (curScore != prevScore) {
-        ++rank;
+        rank++;
         prevScore = curScore;
-        // print('$curScore - $rank');
+
+        rank += scoreSkip;
+        scoreSkip = 0;
+      } else {
+        scoreSkip++;
       }
+
       teamPlaces[element] = rank;
     }
 

@@ -28,3 +28,8 @@ Each Faculty can give each team as many game points for their own game, resultin
 - Use the `stable` channel by running `flutter channel stable`.
 - Run `flutter pub get` to install the dependencies.
 - Run `flutter run [-d Chrome]` to start the app.
+
+## Deployment
+
+- Run `flutter build web --web-renderer canvaskit --release` to build the app.
+- Run `firebase deploy` to deploy the app to Firebase.

@@ -63,54 +63,12 @@ class TeamFacultyCard extends StatelessWidget {
       {required this.team, required this.gameFaculty, Key? key})
       : super(key: key);
 
-  int getFacGameScore(Team team) {
-    return gameFaculty.scores[team.id] ?? 0;
-  }
-
-  Map<Team, int> mapTeamsToScore(List<Team> teams) {
-    teams.sort(((a, b) => getFacGameScore(b).compareTo(getFacGameScore(a))));
-
-    var teamPlaces = <Team, int>{};
-
-    var prevScore = -1;
-    var rank = 0;
-
-    for (var element in teams) {
-      var curScore = getFacGameScore(element);
-      if (curScore == 0) {
-        continue;
-      }
-
-      if (curScore != prevScore) {
-        ++rank;
-        prevScore = curScore;
-      }
-      teamPlaces[element] = rank;
-      // print('${gameFaculty.name} ${team.name} - $rank');
-    }
-
-    return teamPlaces;
-  }
-
-  int rankToPoints(int teamCount, int rank) {
-    return (teamCount - rank + 1) * 10;
-  }
-
   @override
   Widget build(BuildContext context) {
     var teams = Provider.of<List<Team>>(context);
+    var faculties = Provider.of<List<Faculty>>(context);
 
-    var ranks = mapTeamsToScore(teams);
-    var currentRankRef =
-        ranks.entries.where((element) => element.key.id == team.id);
-    var rankString =
-        currentRankRef.isNotEmpty ? '${currentRankRef.first.value}. Platz' : '';
-    var rank = currentRankRef.isNotEmpty
-        ? currentRankRef.first.value
-        : teams.length + 1;
-
-    var points = rankToPoints(teams.length, rank);
-    var pointsString = points == 0 ? '' : '$points Punkte';
+    var points = GameUtils.getGlobalPointsForTeam(teams, faculties, team);
 
     return Card(
       child: ListTile(
@@ -121,8 +79,14 @@ class TeamFacultyCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(rankString),
-            Text(pointsString),
+            Text('${points[gameFaculty] ?? 0}'),
           ],
+        ),
+        tileColor: Theme.of(context).colorScheme.surfaceVariant,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
         ),
       ),
     );

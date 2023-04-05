@@ -34,7 +34,7 @@ class _MainProviderState extends State<MainProvider> {
             icon: Icon(Icons.folder_outlined),
             selectedIcon: Icon(Icons.folder),
             label: 'Fakultäten',
-          ),
+          )
         ],
         selectedIndex: index,
         onDestinationSelected: (index) => setState(() {

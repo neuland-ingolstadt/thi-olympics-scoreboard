@@ -16,6 +16,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
 
 Faculty _$FacultyFromJson(Map<String, dynamic> json) => Faculty(
       name: json['name'] as String? ?? 'Error',
+      shortname: json['shortname'] as String? ?? 'Error',
       icon: json['icon'] as int? ?? 0xe237,
       color: json['color'] as String? ?? '#ff1e1e',
       id: json['id'] as String? ?? '',
@@ -23,15 +24,18 @@ Faculty _$FacultyFromJson(Map<String, dynamic> json) => Faculty(
             (k, e) => MapEntry(k, e as int),
           ) ??
           const {},
+      scoresEnabled: json['scoresEnabled'] as bool? ?? true,
       game: json['game'] as String? ?? 'Disziplin der Fakultät',
     );
 
 Map<String, dynamic> _$FacultyToJson(Faculty instance) => <String, dynamic>{
       'name': instance.name,
+      'shortname': instance.shortname,
       'icon': instance.icon,
       'color': instance.color,
       'id': instance.id,
       'game': instance.game,
+      'scoresEnabled': instance.scoresEnabled,
       'scores': instance.scores,
     };
 

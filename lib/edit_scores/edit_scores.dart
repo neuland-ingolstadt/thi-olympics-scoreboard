@@ -15,42 +15,12 @@ class EditScores extends StatefulWidget {
 }
 
 class _EditScoresState extends State<EditScores> {
-  void updateScore(BuildContext context, Team team, String text, Faculty faculty) {
+  void updateScore(
+      BuildContext context, Team team, String text, Faculty faculty) {
     var score = int.tryParse(text) ?? 0;
 
     FirestoreService().updateTeamScore(faculty, team, score);
     Navigator.pop(context);
-  }
-
-  void createTeam(String text) {
-    FirestoreService().createTeam(widget.faculty.id, text);
-    Navigator.pop(context);
-  }
-
-  int getScoreOfTeam(Faculty faculty, Team team) {
-    return faculty.scores[team.id] ?? 0;
-  }
-
-  Map<Team, int> mapTeamsToPlace(Faculty faculty, List<Team> teams) {
-    teams.sort(((a, b) => getScoreOfTeam(faculty, b).compareTo(getScoreOfTeam(faculty, a))));
-
-    var teamPlaces = {
-      for (var element in teams) element: 0,
-    };
-
-    var prevScore = -1;
-    var rank = 0;
-
-    for (var element in teams) {
-      var curScore = getScoreOfTeam(faculty, element);
-      if (curScore != prevScore) {
-        ++rank;
-        prevScore = curScore;
-      }
-      teamPlaces[element] = rank;
-    }
-
-    return teamPlaces;
   }
 
   @override
@@ -67,10 +37,9 @@ class _EditScoresState extends State<EditScores> {
       );
     }
 
-    var facultyRef = faculties.where((element) => element.id == widget.faculty.id);
+    var facultyRef =
+        faculties.where((element) => element.id == widget.faculty.id);
     var faculty = facultyRef.isNotEmpty ? facultyRef.first : Faculty();
-
-    var ranks = mapTeamsToPlace(faculty, teams);
 
     return Scaffold(
       appBar: getAppBar(context),
@@ -143,6 +112,12 @@ class _EditScoresState extends State<EditScores> {
                           },
                         );
                       },
+                      tileColor: Theme.of(context).colorScheme.surfaceVariant,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
                     ),
                   );
                 },

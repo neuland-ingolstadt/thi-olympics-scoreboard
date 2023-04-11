@@ -11,9 +11,6 @@ class TeamsScreen extends StatelessWidget {
     var faculties = Provider.of<List<Faculty>>(context);
     var teams = Provider.of<List<Team>>(context);
 
-    // var scores = getGlobalScores(faculties, teams);
-    // var ranks = getGlobalRanks(scores);
-
     return Container(
       padding: const EdgeInsets.all(10),
       child: ListView.builder(
@@ -22,8 +19,6 @@ class TeamsScreen extends StatelessWidget {
           final team = teams[index];
           return TeamItem(
             team: team,
-            rank: ranks[team] ?? 0,
-            score: scores[team] ?? 0,
           );
         },
       ),

@@ -19,7 +19,7 @@ class _EditScoresState extends State<EditScores> {
       BuildContext context, Team team, String text, Faculty faculty) {
     var score = int.tryParse(text) ?? 0;
 
-    FirestoreService().updateTeamScore(faculty, team, score);
+    FirestoreService().updateTeamScore(team, faculty, score);
     Navigator.pop(context);
   }
 
@@ -67,8 +67,8 @@ class _EditScoresState extends State<EditScores> {
                 itemCount: teams.length,
                 itemBuilder: (context, index) {
                   var team = teams[index];
-                  var rank = ranks[team];
-                  var score = faculty.scores[team.id] ?? 0;
+                  var rank = 0;
+                  var score = team.scores[faculty.id] ?? 0;
 
                   return Card(
                     child: ListTile(

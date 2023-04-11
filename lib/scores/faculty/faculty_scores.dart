@@ -47,6 +47,7 @@ class _FacultiesScreenState extends State<FacultiesScreen> {
         faculties.where((element) => element.id != 'sprecherrat').toList();
 
     var teams = Provider.of<List<Team>>(context);
+    var globalScores = <String, int>{};
 
     return Container(
       padding: const EdgeInsets.all(10),
@@ -55,8 +56,8 @@ class _FacultiesScreenState extends State<FacultiesScreen> {
         itemBuilder: (context, index) {
           final faculty = faculties[index];
           return FacultyItem(
-            rank: ranks[faculty] ?? 0,
-            score: scores[faculty] ?? 0,
+            rank: 0,
+            score: 0,
             faculty: faculty,
           );
         },

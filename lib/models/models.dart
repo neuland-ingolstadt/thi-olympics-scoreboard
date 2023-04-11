@@ -20,7 +20,6 @@ class Faculty {
   String id;
   String game;
   bool scoresEnabled;
-  Map<String, int> scores;
 
   Faculty({
     this.name = 'Error',
@@ -28,10 +27,23 @@ class Faculty {
     this.icon = 0xe237,
     this.color = '#ff1e1e',
     this.id = '',
-    this.scores = const {},
     this.scoresEnabled = true,
     this.game = 'Disziplin der Fakultät',
   });
+
+  // returns a map of teams and their ranks for the game of this faculty
+  Map<String, int> getTeamRanks(List<Team> teams) {
+    var scores = teams.map((e) => e.scores[id] ?? 0).toList();
+    scores.sort((a, b) => b.compareTo(a));
+
+    var teamPlaces = <String, int>{};
+
+    for (var team in teams) {
+      teamPlaces[team.id] = scores.indexOf(team.scores[id] ?? 0) + 1;
+    }
+
+    return teamPlaces;
+  }
 
   factory Faculty.fromJson(String id, Map<String, dynamic> json) =>
       _$FacultyFromJson(json)..id = id;
@@ -44,11 +56,13 @@ class Team {
   String name;
   String id;
   String faculty;
+  Map<String, int> scores;
 
   Team({
     this.name = 'Error',
     this.id = '',
     this.faculty = 'error',
+    this.scores = const {},
   });
 
   factory Team.fromJson(String id, Map<String, dynamic> json) =>
@@ -72,25 +86,12 @@ class GameUtils {
     return teamPlaces;
   }
 
-  static Map<Faculty, int> getGlobalPointsForTeam(
-      List<Team> teams, List<Faculty> faculties, Team team) {
-    var teamCount = teams
-        .where(
-            (t) => faculties.firstWhere((f) => f.id == t.faculty).scoresEnabled)
-        .length;
+  static int getPointsFromRank(Map<String, int> allRanks, Team team) {
+    var teamRank = allRanks[team.id] ?? 0;
 
-    var scores = <Faculty, int>{};
+    // todo avg points when tied
+    var points = (allRanks.length + 1 - teamRank) * 10;
 
-    for (var faculty in faculties) {
-      var teamPlaces = getRankFromScores(faculty.scores);
-      print(faculty.name);
-      print(teamPlaces);
-
-      var rank = teamPlaces[team] ?? teamCount + 1;
-
-      scores[faculty] = (teamCount - rank + 1) * 10;
-    }
-
-    return scores;
+    return points;
   }
 }

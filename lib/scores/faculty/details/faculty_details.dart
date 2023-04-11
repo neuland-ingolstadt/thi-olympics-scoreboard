@@ -15,7 +15,6 @@ class FacultyDetails extends StatelessWidget {
 
     var facultyTeams =
         allTeams.where((element) => element.faculty == faculty.id).toList();
-    // var faculty = facultiesRef.isNotEmpty ? facultiesRef.first : Faculty();
 
     return Scaffold(
       appBar: getAppBar(context),
@@ -75,7 +74,7 @@ class TeamFacultyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var teams = Provider.of<List<Team>>(context);
     var faculties = Provider.of<List<Faculty>>(context);
-    
+
     return Card(
       child: ListTile(
         title: Text(gameFaculty.game),
@@ -84,23 +83,12 @@ class TeamFacultyCard extends StatelessWidget {
         trailing: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // RichText(
-            //   text: TextSpan(children: [
-            //     TextSpan(
-            //       text: '$rankString ',
-            //       style: const TextStyle(fontWeight: FontWeight.bold),
-            //     ),
-            //     TextSpan(
-            //       text: pointsString,
-            //     ),
-            //   ]),
-            // ),
+          children: const [
             Text(
-              rankString,
+              'rankString',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text(pointsString),
+            Text('pointsString'),
           ],
         ),
         tileColor: Theme.of(context).colorScheme.surfaceVariant,

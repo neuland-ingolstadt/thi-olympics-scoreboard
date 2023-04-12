@@ -23,13 +23,27 @@ class TeamFacultyCard extends StatelessWidget {
         title: Text(gameFaculty.game),
         leading: FacultyUtils.getCirlceAvatar(context, gameFaculty),
         subtitle: Text(gameFaculty.name),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text("$teamRank. Platz"),
-            Text(
-                '${team.scores[gameFaculty.id]} Spiel-Punkte => ${GameUtils.getPointsFromRank(gameRanks, team)} Gesamtpunkte'),
-          ],
+        trailing: Visibility(
+          visible: team.scores[gameFaculty.id] != null,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text("$teamRank. Platz"),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("${team.scores[gameFaculty.id]} Spielpunkte"),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    child: Icon(Icons.circle, size: 5),
+                  ),
+                  Text(
+                      "${GameUtils.getPointsFromRank(gameRanks, team)} Punkte"),
+                ],
+              )
+            ],
+          ),
         ),
         tileColor: Theme.of(context).colorScheme.surfaceVariant,
         shape: const RoundedRectangleBorder(

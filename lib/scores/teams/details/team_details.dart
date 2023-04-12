@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:scoreboard/models/models.dart';
 import 'package:scoreboard/scores/teams/details/team_faculty_card.dart';
 import 'package:scoreboard/shared/appbar.dart';
-import 'package:scoreboard/shared/faculty_utils.dart';
 
 class TeamDetails extends StatelessWidget {
   final Team team;

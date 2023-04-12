@@ -21,6 +21,7 @@ Faculty _$FacultyFromJson(Map<String, dynamic> json) => Faculty(
       color: json['color'] as String? ?? '#ff1e1e',
       id: json['id'] as String? ?? '',
       scoresEnabled: json['scoresEnabled'] as bool? ?? true,
+      hasGame: json['hasGame'] as bool? ?? true,
       game: json['game'] as String? ?? 'Disziplin der Fakultät',
     );
 
@@ -32,6 +33,7 @@ Map<String, dynamic> _$FacultyToJson(Faculty instance) => <String, dynamic>{
       'id': instance.id,
       'game': instance.game,
       'scoresEnabled': instance.scoresEnabled,
+      'hasGame': instance.hasGame,
     };
 
 Team _$TeamFromJson(Map<String, dynamic> json) => Team(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/models/models.dart';
-import 'package:scoreboard/scores/faculty/faculty_scores.dart';
+import 'package:scoreboard/scores/faculty/faculty_screen.dart';
 import 'package:scoreboard/services/firestore.dart';
 import 'package:scoreboard/shared/appbar.dart';
 import 'package:scoreboard/shared/global.dart';
@@ -55,7 +55,7 @@ class _MainProviderState extends State<MainProvider> {
     const SharedNavigationDestionation(
       icon: Icon(Icons.folder_outlined),
       selectedIcon: Icon(Icons.folder),
-      label: 'Fakultäten',
+      label: 'Fachschaften',
     ),
   ];
   final screens = [const TeamsScreen(), const FacultiesScreen()];

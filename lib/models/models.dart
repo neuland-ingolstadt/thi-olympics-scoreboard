@@ -20,6 +20,7 @@ class Faculty {
   String id;
   String game;
   bool scoresEnabled;
+  bool hasGame;
 
   Faculty({
     this.name = 'Error',
@@ -28,6 +29,7 @@ class Faculty {
     this.color = '#ff1e1e',
     this.id = '',
     this.scoresEnabled = true,
+    this.hasGame = true,
     this.game = 'Disziplin der Fakultät',
   });
 
@@ -65,6 +67,17 @@ class Team {
     this.scores = const {},
   });
 
+  double getGlobalScore(List<Faculty> faculties, List<Team> teams) {
+    var score = 0.0;
+    for (var faculty in faculties) {
+      if (scores[faculty.id] == null) continue;
+      var ranks = faculty.getTeamRanks(teams);
+      score += GameUtils.getPointsFromRank(ranks, this);
+    }
+
+    return score;
+  }
+
   factory Team.fromJson(String id, Map<String, dynamic> json) =>
       _$TeamFromJson(json)..id = id;
 
@@ -72,7 +85,7 @@ class Team {
 }
 
 class GameUtils {
-  static Map<T, int> getRankFromScores<T>(Map<T, int> globalScores) {
+  static Map<T, int> getRankFromScores<T>(Map<T, double> globalScores) {
     var scores = globalScores.values.toList();
 
     scores.sort((a, b) => b.compareTo(a));
@@ -86,12 +99,53 @@ class GameUtils {
     return teamPlaces;
   }
 
-  static int getPointsFromRank(Map<String, int> allRanks, Team team) {
+  static double getPointsFromRank(Map<String, int> allRanks, Team team) {
     var teamRank = allRanks[team.id] ?? 0;
 
-    // todo avg points when tied
-    var points = (allRanks.length + 1 - teamRank) * 10;
+    var sameRank = allRanks.values.where((e) => e == teamRank).length;
+    var points = 0.0;
+    for (var i = 0; i < sameRank; i++) {
+      points += (allRanks.length - teamRank - i) * 10;
+    }
+    points = points / sameRank;
 
     return points;
+  }
+
+  static Map<String, double> getGlobalScores(
+      List<Team> teams, List<Faculty> faculties) {
+    var globalScores = <String, double>{};
+
+    for (var team in teams) {
+      globalScores[team.id] = team.getGlobalScore(faculties, teams);
+    }
+
+    return globalScores;
+  }
+
+  static Map<String, double> getAllFacultyTeamScores(
+      List<Faculty> faculties, List<Team> teams) {
+    var globalScores = GameUtils.getGlobalScores(teams, faculties);
+
+    var facultyScores = <String, double>{};
+
+    for (var faculty in faculties) {
+      var facultyTeams = teams.where((e) => e.faculty == faculty.id).toList();
+
+      if (facultyTeams.isEmpty) {
+        facultyScores[faculty.id] = 0;
+        continue;
+      }
+
+      var scores = facultyTeams
+          .map((e) => globalScores[e.id])
+          .reduce((value, element) => value! + element!);
+
+      scores = (scores ?? 0) / facultyTeams.length;
+
+      facultyScores[faculty.id] = scores;
+    }
+
+    return facultyScores;
   }
 }

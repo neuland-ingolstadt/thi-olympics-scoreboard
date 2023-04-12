@@ -7,13 +7,16 @@ import 'package:scoreboard/shared/faculty_utils.dart';
 
 class TeamItem extends StatelessWidget {
   final Team team;
+  final int rank;
+  final double score;
 
-  const TeamItem({required this.team, Key? key}) : super(key: key);
+  const TeamItem(
+      {required this.team, Key? key, required this.rank, required this.score})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var faculties = Provider.of<List<Faculty>>(context);
-    var teams = Provider.of<List<Team>>(context);
 
     var facultiesRef = faculties.where((element) => element.id == team.faculty);
     var faculty = facultiesRef.isNotEmpty ? facultiesRef.first : Faculty();
@@ -23,7 +26,7 @@ class TeamItem extends StatelessWidget {
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('ß Punkte'),
+            Text('$score Punkte'),
             const Icon(Icons.arrow_right_rounded),
           ],
         ),
@@ -45,7 +48,7 @@ class TeamItem extends StatelessWidget {
             ),
           ],
         ),
-        subtitle: Text('f. Platz'),
+        subtitle: Text('$rank. Platz'),
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return TeamDetailsProvider(team: team);

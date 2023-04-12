@@ -4,7 +4,7 @@ import 'package:scoreboard/scores/faculty/details/faculty_details_provider.dart'
 import 'package:scoreboard/shared/faculty_utils.dart';
 
 class FacultyItem extends StatelessWidget {
-  final int score;
+  final double score;
   final int rank;
   final Faculty faculty;
 

@@ -44,6 +44,10 @@ Team _$TeamFromJson(Map<String, dynamic> json) => Team(
             (k, e) => MapEntry(k, e as int),
           ) ??
           const {},
+      times: (json['times'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, e as String),
+          ) ??
+          const {},
     );
 
 Map<String, dynamic> _$TeamToJson(Team instance) => <String, dynamic>{
@@ -51,4 +55,5 @@ Map<String, dynamic> _$TeamToJson(Team instance) => <String, dynamic>{
       'id': instance.id,
       'faculty': instance.faculty,
       'scores': instance.scores,
+      'times': instance.times,
     };

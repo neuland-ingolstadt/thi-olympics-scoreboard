@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/login/login.dart';
 import 'package:scoreboard/models/models.dart';
 import 'package:scoreboard/scores/faculty/faculty_screen.dart';
 import 'package:scoreboard/services/firestore.dart';
@@ -57,8 +58,17 @@ class _MainProviderState extends State<MainProvider> {
       selectedIcon: Icon(Icons.folder),
       label: 'Fachschaften',
     ),
+    // const SharedNavigationDestionation(
+    //   icon: Icon(Icons.settings_outlined),
+    //   selectedIcon: Icon(Icons.settings),
+    //   label: 'Einstellungen',
+    // ),
   ];
-  final screens = [const TeamsScreen(), const FacultiesScreen()];
+  final screens = [
+    const TeamsScreen(),
+    const FacultiesScreen(),
+    // const LoginPage()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -109,15 +119,20 @@ class _MainProviderState extends State<MainProvider> {
                                 ),
                                 height: 35),
                             Padding(padding: EdgeInsets.only(left: 10)),
-                            Text('Fachschaftsolympiade',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            Text(
+                              'Fachschaftsolympiade',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
                           ],
                         ),
                       ),
                       ...destinations
                           .map((e) => e.toNavigationDrawerDestination())
-                          .toList()
+                          .toList(),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 10),
+                      ),
                     ],
                   ),
                   Expanded(child: screens[index]),

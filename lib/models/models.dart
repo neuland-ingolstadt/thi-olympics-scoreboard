@@ -59,12 +59,14 @@ class Team {
   String id;
   String faculty;
   Map<String, int> scores;
+  Map<String, String> times;
 
   Team({
     this.name = 'Error',
     this.id = '',
     this.faculty = 'error',
     this.scores = const {},
+    this.times = const {},
   });
 
   double getGlobalScore(List<Faculty> faculties, List<Team> teams) {

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/services/firestore.dart';
 import 'package:scoreboard/shared/appbar.dart';
+import 'package:scoreboard/shared/list_title.dart';
 
 import '../models/models.dart';
 
@@ -30,33 +31,27 @@ class _EditScoresState extends State<EditScores> {
 
     if (widget.faculty.id == 'Error') {
       return Scaffold(
-        appBar: getAppBar(context),
+        appBar: getAppBar(context, 'Einstellungen', false),
         body: const Center(
           child: Text('Du bist kein Mitglied einer Fakultät!'),
         ),
       );
     }
 
+    teams.sort((a, b) => a.name.compareTo(b.name));
+
     var facultyRef =
         faculties.where((element) => element.id == widget.faculty.id);
     var faculty = facultyRef.isNotEmpty ? facultyRef.first : Faculty();
 
     return Scaffold(
-      appBar: getAppBar(context),
+      appBar: getAppBar(context, faculty.name, false),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             const Padding(
               padding: EdgeInsets.all(8),
-            ),
-            Text(
-              widget.faculty.name,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Theme.of(context).colorScheme.primary,
-              ),
             ),
             const Text('Tippe auf ein Team um den Score zu ändern.'),
             const Padding(
@@ -67,14 +62,22 @@ class _EditScoresState extends State<EditScores> {
                 itemCount: teams.length,
                 itemBuilder: (context, index) {
                   var team = teams[index];
-                  var rank = 0;
                   var score = team.scores[faculty.id] ?? 0;
+
+                  var teamFacultyRef =
+                      faculties.where((element) => element.id == team.faculty);
+
+                  var teamFaculty = teamFacultyRef.isNotEmpty
+                      ? teamFacultyRef.first
+                      : Faculty();
 
                   return Card(
                     child: ListTile(
-                      title: Text(team.name),
+                      title: ListTitle(
+                        title: team.name,
+                        faculty: teamFaculty,
+                      ),
                       trailing: Text(score.toString()),
-                      subtitle: Text('$rank. Platz'),
                       onTap: () {
                         showDialog(
                           context: context,

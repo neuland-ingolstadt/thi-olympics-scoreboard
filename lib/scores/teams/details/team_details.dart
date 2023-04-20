@@ -15,41 +15,24 @@ class TeamDetails extends StatelessWidget {
     var faculty = facultiesRef.isNotEmpty ? facultiesRef.first : Faculty();
 
     return Scaffold(
-      appBar: getAppBar(context),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(8),
+      appBar: getAppBar(context, team.name),
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: faculties.length,
+              itemBuilder: (context, index) {
+                var faculty = faculties[index];
+                return TeamFacultyCard(
+                  gameFaculty: faculty,
+                  team: team,
+                );
+              },
             ),
-            Text(
-              team.name,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-            Text(faculty.name),
-            const Padding(
-              padding: EdgeInsets.all(8),
-            ),
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: faculties.length,
-                itemBuilder: (context, index) {
-                  var faculty = faculties[index];
-                  return TeamFacultyCard(
-                    gameFaculty: faculty,
-                    team: team,
-                  );
-                },
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );

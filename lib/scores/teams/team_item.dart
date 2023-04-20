@@ -4,6 +4,7 @@ import 'package:scoreboard/models/models.dart';
 import 'package:scoreboard/scores/teams/details/team_details_provider.dart';
 import 'package:scoreboard/services/hex_color.dart';
 import 'package:scoreboard/shared/faculty_utils.dart';
+import 'package:scoreboard/shared/list_title.dart';
 
 class TeamItem extends StatelessWidget {
   final Team team;
@@ -30,23 +31,9 @@ class TeamItem extends StatelessWidget {
             const Icon(Icons.arrow_right_rounded),
           ],
         ),
-        title: Row(
-          children: [
-            Icon(
-              FacultyUtils.iconFromFaculty(context, faculty),
-              color: HexColor(faculty.color),
-              size: 20,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(3.5),
-            ),
-            Text(
-              team.name,
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-            ),
-          ],
+        title: ListTitle(
+          title: team.name,
+          faculty: faculty,
         ),
         subtitle: Text('$rank. Platz'),
         onTap: () {

@@ -4,6 +4,7 @@ import 'package:scoreboard/login/login.dart';
 import 'package:scoreboard/models/models.dart';
 import 'package:scoreboard/scores/faculty/faculty_screen.dart';
 import 'package:scoreboard/services/firestore.dart';
+import 'package:scoreboard/settings/settings.dart';
 import 'package:scoreboard/shared/appbar.dart';
 import 'package:scoreboard/shared/global.dart';
 
@@ -73,7 +74,9 @@ class _MainProviderState extends State<MainProvider> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: isDekstop(context) ? null : getAppBar(context, true),
+      appBar: isDekstop(context)
+          ? null
+          : getAppBar(context, 'Fachschaftsolympiade', true),
       bottomNavigationBar: isDekstop(context)
           ? null
           : NavigationBar(
@@ -103,9 +106,22 @@ class _MainProviderState extends State<MainProvider> {
                   NavigationDrawer(
                     elevation: 1,
                     selectedIndex: index,
-                    onDestinationSelected: (index) => setState(() {
-                      this.index = index;
-                    }),
+                    onDestinationSelected: (index) {
+                      if (index == 2) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SettingsPage(),
+                          ),
+                        );
+
+                        return;
+                      }
+
+                      setState(() {
+                        this.index = index;
+                      });
+                    },
                     children: [
                       const Padding(padding: EdgeInsets.only(top: 10)),
                       Padding(
@@ -122,7 +138,7 @@ class _MainProviderState extends State<MainProvider> {
                             Text(
                               'Fachschaftsolympiade',
                               style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -130,8 +146,10 @@ class _MainProviderState extends State<MainProvider> {
                       ...destinations
                           .map((e) => e.toNavigationDrawerDestination())
                           .toList(),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 10),
+                      const NavigationDrawerDestination(
+                        icon: Icon(Icons.settings_rounded),
+                        selectedIcon: Icon(Icons.settings_rounded),
+                        label: Text('Einstellungen'),
                       ),
                     ],
                   ),

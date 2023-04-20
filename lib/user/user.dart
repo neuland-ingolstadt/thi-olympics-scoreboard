@@ -19,7 +19,7 @@ class _UserOverviewState extends State<UserOverview> {
     var user = FirebaseAuth.instance.currentUser!;
 
     return Scaffold(
-      appBar: getAppBar(context),
+      appBar: getAppBar(context, 'Einstellungen'),
       body: FutureBuilder<Faculty>(
         future: FirestoreService().getFacultyFromUser(),
         builder: (context, snapshot) {

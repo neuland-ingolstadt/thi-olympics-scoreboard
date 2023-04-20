@@ -18,18 +18,24 @@ class TeamsScreen extends StatelessWidget {
 
     teams.sort((a, b) => globalScores[b.id]!.compareTo(globalScores[a.id]!));
 
-    return Container(
-      padding: const EdgeInsets.all(10),
-      child: ListView.builder(
-        itemCount: teams.length,
-        itemBuilder: (context, index) {
-          final team = teams[index];
-          return TeamItem(
-            team: team,
-            rank: ranks[team.id] ?? 0,
-            score: globalScores[team.id] ?? 0,
-          );
-        },
+    return Align(
+      alignment: Alignment.topCenter,
+      child: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: teams.length,
+            itemBuilder: (context, index) {
+              final team = teams[index];
+              return TeamItem(
+                team: team,
+                rank: ranks[team.id] ?? 0,
+                score: globalScores[team.id] ?? 0,
+              );
+            },
+          ),
+        ),
       ),
     );
   }

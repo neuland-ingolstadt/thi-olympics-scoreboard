@@ -23,43 +23,25 @@ class FacultyDetails extends StatelessWidget {
         .sort((a, b) => globalScores[b.id]!.compareTo(globalScores[a.id]!));
 
     return Scaffold(
-      appBar: getAppBar(context),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(8),
+      appBar: getAppBar(context, faculty.name),
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: facultyTeams.length,
+              itemBuilder: (context, index) {
+                var team = facultyTeams[index];
+                return TeamItem(
+                  team: team,
+                  rank: ranks[team.id] ?? 0,
+                  score: globalScores[team.id] ?? 0,
+                );
+              },
             ),
-            Text(
-              faculty.name,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-            Text(
-                '${facultyTeams.length} ${facultyTeams.length == 1 ? 'Team' : 'Teams'}'),
-            const Padding(
-              padding: EdgeInsets.all(8),
-            ),
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: facultyTeams.length,
-                itemBuilder: (context, index) {
-                  var team = facultyTeams[index];
-                  return TeamItem(
-                    team: team,
-                    rank: ranks[team.id] ?? 0,
-                    score: globalScores[team.id] ?? 0,
-                  );
-                },
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );

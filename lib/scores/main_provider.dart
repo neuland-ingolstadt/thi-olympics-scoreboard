@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/login/login.dart';
 import 'package:scoreboard/models/models.dart';
 import 'package:scoreboard/scores/faculty/faculty_screen.dart';
 import 'package:scoreboard/services/firestore.dart';

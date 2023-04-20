@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/models/models.dart';
 import 'package:scoreboard/scores/teams/details/team_details_provider.dart';
-import 'package:scoreboard/services/hex_color.dart';
-import 'package:scoreboard/shared/faculty_utils.dart';
 import 'package:scoreboard/shared/list_title.dart';
 
 class TeamItem extends StatelessWidget {

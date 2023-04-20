@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scoreboard/edit_scores/edit_scores_provider.dart';
-import 'package:scoreboard/login/login.dart';
-import 'package:scoreboard/user/user.dart';
 
-import '../services/auth.dart';
 import '../settings/settings.dart';
 
 AppBar getAppBar(BuildContext context, String title,

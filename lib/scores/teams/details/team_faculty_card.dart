@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/models.dart';
-import '../../../services/hex_color.dart';
-import '../../../shared/faculty_utils.dart';
 import '../../../shared/list_title.dart';
 
 class TeamFacultyCard extends StatelessWidget {

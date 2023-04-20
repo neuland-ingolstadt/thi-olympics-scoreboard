@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboard/models/models.dart';
 import 'package:scoreboard/scores/faculty/details/faculty_details_provider.dart';
-import 'package:scoreboard/shared/faculty_utils.dart';
 
-import '../../services/hex_color.dart';
 import '../../shared/list_title.dart';
 
 class FacultyItem extends StatelessWidget {

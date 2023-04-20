@@ -11,8 +11,8 @@ class TeamDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var faculties = Provider.of<List<Faculty>>(context);
-    var facultiesRef = faculties.where((element) => element.id == team.faculty);
-    var faculty = facultiesRef.isNotEmpty ? facultiesRef.first : Faculty();
+    // var facultiesRef = faculties.where((element) => element.id == team.faculty);
+    // var faculty = facultiesRef.isNotEmpty ? facultiesRef.first : Faculty();
 
     return Scaffold(
       appBar: getAppBar(context, team.name),

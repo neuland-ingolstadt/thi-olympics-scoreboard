@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/scores/games/details/game_details_provider.dart';
 
 import '../../../models/models.dart';
 import '../../../shared/list_title.dart';
@@ -40,9 +41,20 @@ class TeamFacultyCard extends StatelessWidget {
             faculty: gameFaculty,
           ),
         ),
-        trailing: Visibility(
-          visible: team.scores[gameFaculty.id] != null && showScores,
-          child: Text("$teamRank. Platz"),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return GameDetailsProvider(faculty: gameFaculty);
+          }));
+        },
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Visibility(
+              visible: team.scores[gameFaculty.id] != null && showScores,
+              child: Text("$teamRank. Platz"),
+            ),
+            const Icon(Icons.arrow_right_rounded),
+          ],
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

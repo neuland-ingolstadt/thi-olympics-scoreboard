@@ -57,7 +57,7 @@ class _MainProviderState extends State<MainProvider> {
     const SharedNavigationDestionation(
       icon: Icon(Icons.folder_outlined),
       selectedIcon: Icon(Icons.folder),
-      label: 'Fachschaften',
+      label: 'Fakultäten',
     ),
     const SharedNavigationDestionation(
       icon: Icon(Icons.videogame_asset_outlined),

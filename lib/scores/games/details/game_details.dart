@@ -15,7 +15,8 @@ class GameDetails extends StatelessWidget {
 
     var ranks = faculty.getTeamRanks(
         teams.where((element) => element.hasScoresEnabled(faculties)).toList());
-    teams.sort((a, b) => (ranks[b.id] ?? -1).compareTo(ranks[a.id] ?? -1));
+    teams.sort((a, b) =>
+        (ranks[a.id] ?? ranks.length).compareTo(ranks[b.id] ?? ranks.length));
 
     return Scaffold(
       appBar: getAppBar(context, faculty.game),

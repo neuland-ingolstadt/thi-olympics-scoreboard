@@ -42,11 +42,11 @@ class FirestoreService {
     ref.delete();
   }
 
-  Future<void> updateTeamScore(Faculty faculty, Team team, int score) async {
-    var ref = _db.collection('faculties').doc(faculty.id);
-    
-    var scores = Map.of(faculty.scores);
-    scores[team.id] = score;
+  Future<void> updateTeamScore(Team team, Faculty faculty, int score) async {
+    var ref = _db.collection('teams').doc(team.id);
+
+    var scores = Map.of(team.scores);
+    scores[faculty.id] = score;
 
     await ref.set({
       'scores': scores,

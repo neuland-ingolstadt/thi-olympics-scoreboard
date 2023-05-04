@@ -2,52 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/models/models.dart';
 import 'package:scoreboard/scores/teams/details/team_details_provider.dart';
-import 'package:scoreboard/services/hex_color.dart';
-import 'package:scoreboard/shared/faculty_utils.dart';
+import 'package:scoreboard/shared/list_title.dart';
 
 class TeamItem extends StatelessWidget {
   final Team team;
   final int rank;
-  final int score;
+  final double score;
 
   const TeamItem(
-      {required this.team, required this.rank, required this.score, Key? key})
+      {required this.team, Key? key, required this.rank, required this.score})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var faculties = Provider.of<List<Faculty>>(context)
-        .where((element) => element.id == team.faculty);
-    var faculty = faculties.isNotEmpty ? faculties.first : Faculty();
+    var faculties = Provider.of<List<Faculty>>(context);
+
+    var showScores = faculties
+        .firstWhere(
+          (element) => element.id == team.faculty,
+          orElse: () => Faculty(
+            scoresEnabled: false,
+          ),
+        )
+        .scoresEnabled;
+
+    var facultiesRef = faculties.where((element) => element.id == team.faculty);
+    var faculty = facultiesRef.isNotEmpty ? facultiesRef.first : Faculty();
 
     return Card(
       child: ListTile(
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('$score Punkte'),
+            Visibility(
+              visible: showScores,
+              child: Text('$score Punkte'),
+            ),
             const Icon(Icons.arrow_right_rounded),
           ],
         ),
-        title: Row(
-          children: [
-            Icon(
-              FacultyUtils.iconFromFaculty(context, faculty),
-              color: HexColor(faculty.color),
-              size: 20,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(3.5),
-            ),
-            Text(
-              team.name,
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-            ),
-          ],
+        title: ListTitle(
+          title: team.name,
+          faculty: faculty,
         ),
-        subtitle: Text('$rank. Platz'),
+        subtitle: Text(showScores ? '$rank. Platz' : 'Keine Wertung'),
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return TeamDetailsProvider(team: team);
@@ -61,50 +59,5 @@ class TeamItem extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class TeamsList extends StatelessWidget {
-  final Faculty faculty;
-  const TeamsList({required this.faculty, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    var teams = Provider.of<List<Team>>(context);
-    teams = teams.where((e) => e.faculty == faculty.id).toList();
-
-    return Column(
-      children: [
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: teams.length,
-          itemBuilder: (context, index) => TeamsItem(team: teams[index]),
-        ),
-        const Padding(padding: EdgeInsets.only(bottom: 5))
-      ],
-    );
-  }
-}
-
-class TeamsItem extends StatelessWidget {
-  final Team team;
-  const TeamsItem({required this.team, super.key, required});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.only(top: 5),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                team.name,
-              ),
-            ),
-            // Text(
-            //   team.score.toString(),
-            // ),
-          ],
-        ));
   }
 }

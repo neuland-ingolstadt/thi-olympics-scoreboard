@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboard/models/models.dart';
 import 'package:scoreboard/scores/faculty/details/faculty_details_provider.dart';
-import 'package:scoreboard/shared/faculty_utils.dart';
+
+import '../../shared/list_title.dart';
 
 class FacultyItem extends StatelessWidget {
-  final int score;
+  final double score;
   final int rank;
   final Faculty faculty;
 
@@ -20,13 +21,10 @@ class FacultyItem extends StatelessWidget {
     return Card(
       child: ListTile(
         // contentPadding: const EdgeInsets.all(),
-        leading: FacultyUtils.getCirlceAvatar(context, faculty),
-        title: Text(
-          faculty.name,
-          style: const TextStyle(
-            fontSize: 20,
-            // color: HexColor(faculty.color),
-          ),
+        // leading: FacultyUtils.getCirlceAvatar(context, faculty),
+        title: ListTitle(
+          title: faculty.name,
+          faculty: faculty,
         ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,

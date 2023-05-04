@@ -14,6 +14,19 @@ class TeamFacultyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var teams = Provider.of<List<Team>>(context);
+    var faculties = Provider.of<List<Faculty>>(context);
+
+    var showScores = faculties
+        .firstWhere(
+          (element) => element.id == team.faculty,
+          orElse: () => Faculty(
+            scoresEnabled: false,
+          ),
+        )
+        .scoresEnabled;
+
+    teams =
+        teams.where((element) => element.hasScoresEnabled(faculties)).toList();
     var gameRanks = gameFaculty.getTeamRanks(teams);
 
     var teamRank = gameRanks[team.id];
@@ -28,7 +41,7 @@ class TeamFacultyCard extends StatelessWidget {
           ),
         ),
         trailing: Visibility(
-          visible: team.scores[gameFaculty.id] != null,
+          visible: team.scores[gameFaculty.id] != null && showScores,
           child: Text("$teamRank. Platz"),
         ),
         subtitle: Column(
@@ -38,7 +51,7 @@ class TeamFacultyCard extends StatelessWidget {
             team.scores[gameFaculty.id] == null
                 ? Text(
                     (team.times[gameFaculty.id] == null
-                        ? "Nicht gespielt"
+                        ? ""
                         : "${team.times[gameFaculty.id]} Uhr"),
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
@@ -56,12 +69,19 @@ class TeamFacultyCard extends StatelessWidget {
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        child: Icon(Icons.circle, size: 5),
+                      Visibility(
+                        visible: showScores,
+                        child: Row(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5),
+                              child: Icon(Icons.circle, size: 5),
+                            ),
+                            Text(
+                                "${GameUtils.getPointsFromRank(gameRanks, team)} Punkte"),
+                          ],
+                        ),
                       ),
-                      Text(
-                          "${GameUtils.getPointsFromRank(gameRanks, team)} Punkte"),
                     ],
                   ),
             const Padding(

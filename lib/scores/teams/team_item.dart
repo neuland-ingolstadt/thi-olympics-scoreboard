@@ -17,6 +17,15 @@ class TeamItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var faculties = Provider.of<List<Faculty>>(context);
 
+    var showScores = faculties
+        .firstWhere(
+          (element) => element.id == team.faculty,
+          orElse: () => Faculty(
+            scoresEnabled: false,
+          ),
+        )
+        .scoresEnabled;
+
     var facultiesRef = faculties.where((element) => element.id == team.faculty);
     var faculty = facultiesRef.isNotEmpty ? facultiesRef.first : Faculty();
 
@@ -25,7 +34,10 @@ class TeamItem extends StatelessWidget {
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('$score Punkte'),
+            Visibility(
+              visible: showScores,
+              child: Text('$score Punkte'),
+            ),
             const Icon(Icons.arrow_right_rounded),
           ],
         ),
@@ -33,7 +45,7 @@ class TeamItem extends StatelessWidget {
           title: team.name,
           faculty: faculty,
         ),
-        subtitle: Text('$rank. Platz'),
+        subtitle: Text(showScores ? '$rank. Platz' : 'Keine Wertung'),
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return TeamDetailsProvider(team: team);

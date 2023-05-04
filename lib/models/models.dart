@@ -69,7 +69,15 @@ class Team {
     this.times = const {},
   });
 
+  bool hasScoresEnabled(List<Faculty> faculties) {
+    var faculty = faculties.firstWhere((element) => element.id == this.faculty,
+        orElse: () => Faculty(scoresEnabled: false));
+    return faculty.scoresEnabled;
+  }
+
   double getGlobalScore(List<Faculty> faculties, List<Team> teams) {
+    faculties = faculties.where((element) => element.scoresEnabled).toList();
+
     var score = 0.0;
     for (var faculty in faculties) {
       if (scores[faculty.id] == null) continue;
@@ -117,6 +125,9 @@ class GameUtils {
   static Map<String, double> getGlobalScores(
       List<Team> teams, List<Faculty> faculties) {
     var globalScores = <String, double>{};
+    faculties = faculties.where((element) => element.scoresEnabled).toList();
+    teams =
+        teams.where((element) => element.hasScoresEnabled(faculties)).toList();
 
     for (var team in teams) {
       globalScores[team.id] = team.getGlobalScore(faculties, teams);

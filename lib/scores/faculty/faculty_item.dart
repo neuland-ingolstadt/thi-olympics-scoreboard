@@ -20,8 +20,6 @@ class FacultyItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        // contentPadding: const EdgeInsets.all(),
-        // leading: FacultyUtils.getCirlceAvatar(context, faculty),
         title: ListTitle(
           title: faculty.name,
           faculty: faculty,

@@ -18,7 +18,6 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     var headerSize = 16.0;
-    // var explainSize = 12.0;
 
     var user = AuthService().user;
 
@@ -29,7 +28,6 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // PERSONALISATION SETTINGS
             const Padding(
               padding: EdgeInsets.all(12.0),
               child: Text(
@@ -68,8 +66,6 @@ class _SettingsPageState extends State<SettingsPage> {
             const Padding(
               padding: EdgeInsets.all(12.0),
             ),
-
-            // MEMBER AREA
             const Padding(
               padding: EdgeInsets.all(12.0),
               child: Text(

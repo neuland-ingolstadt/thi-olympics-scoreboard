@@ -56,7 +56,6 @@ class GameTeamItem extends StatelessWidget {
                   Text(
                     "$gameScore Spielpunkte",
                     style: TextStyle(
-                      // textstyle: caption
                       fontWeight: FontWeight.w500,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),

@@ -19,15 +19,6 @@ class FirestoreService {
         snapshot.docs.map((doc) => Team.fromJson(doc.id, doc.data())).toList());
   }
 
-  // Future<List<Faculty>> getFaculties() async {
-  //   var ref = _db.collection('faculties');
-  //   var snapshot = await ref.get();
-  //   var topics = snapshot.docs.map((s) => Faculty.fromJson(s.id, s.data()));
-
-  //   // var topics = data.map((d) => Faculty.fromJson(d));
-  //   return topics.toList();
-  // }
-
   void createTeam(String facultyId, String teamName) async {
     var ref = _db.collection('faculties').doc(facultyId).collection('teams');
     ref.add(Team(name: teamName).toJson());
@@ -76,33 +67,4 @@ class FirestoreService {
 
     return faculty;
   }
-
-  // Stream<List<Team>> streamFacultyTeams(String facultyId) {
-  //   if (facultyId.isEmpty) {
-  //     return Stream.value([]);
-  //   }
-
-  //   var ref = _db
-  //       .collection('faculties')
-  //       .doc(facultyId)
-  //       .collection('teams')
-  //       .orderBy('score', descending: true);
-  //   return ref.snapshots().map((snapshot) =>
-  //       snapshot.docs.map((doc) => Team.fromJson(doc.id, doc.data())).toList());
-  // }
-
-  // /// Updates the current user's report document after completing quiz
-  // Future<void> updateUserReport(Quiz quiz) {
-  //   var user = AuthService().user!;
-  //   var ref = _db.collection('reports').doc(user.uid);
-
-  //   var data = {
-  //     'total': FieldValue.increment(1),
-  //     'topics': {
-  //       quiz.topic: FieldValue.arrayUnion([quiz.id])
-  //     }
-  //   };
-
-  //   return ref.set(data, SetOptions(merge: true));
-  // }
 }

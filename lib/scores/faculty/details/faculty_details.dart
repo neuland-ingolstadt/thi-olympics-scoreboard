@@ -19,8 +19,8 @@ class FacultyDetails extends StatelessWidget {
     var globalScores = GameUtils.getGlobalScores(teams, faculties);
     var ranks = GameUtils.getRankFromScores(globalScores);
 
-    facultyTeams
-        .sort((a, b) => globalScores[b.id]!.compareTo(globalScores[a.id]!));
+    teams.sort((a, b) =>
+        (globalScores[b.id] ?? -1).compareTo(globalScores[a.id] ?? -1));
 
     return Scaffold(
       appBar: getAppBar(context, faculty.name),

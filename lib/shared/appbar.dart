@@ -23,26 +23,6 @@ AppBar getAppBar(BuildContext context, String title,
       ],
     ),
     actions: [
-      // Visibility(
-      //   visible: AuthService().user != null && settingsVisisble,
-      //   child: Tooltip(
-      //     message: 'Scores bearbeiten',
-      //     child: IconButton(
-      //       onPressed: () {
-      //         var user = AuthService().user;
-
-      //         if (user != null) {
-      //           Navigator.of(context).push(
-      //             MaterialPageRoute(
-      //               builder: (context) => const EditScoresProvider(),
-      //             ),
-      //           );
-      //         }
-      //       },
-      //       icon: const Icon(Icons.edit_note_rounded),
-      //     ),
-      //   ),
-      // ),
       Visibility(
         visible: settingsVisisble,
         child: IconButton(
@@ -50,11 +30,6 @@ AppBar getAppBar(BuildContext context, String title,
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const SettingsPage();
             }));
-
-            // themeNotifier.toggleTheme();
-
-            // final prefs = await SharedPreferences.getInstance();
-            // prefs.setBool('theme', themeNotifier.isDark);
           },
           icon: const Icon(Icons.settings_rounded),
         ),

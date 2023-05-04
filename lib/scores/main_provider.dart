@@ -69,7 +69,6 @@ class _MainProviderState extends State<MainProvider> {
     const TeamsScreen(),
     const FacultiesScreen(),
     const GamesScreen()
-    // const LoginPage()
   ];
 
   @override

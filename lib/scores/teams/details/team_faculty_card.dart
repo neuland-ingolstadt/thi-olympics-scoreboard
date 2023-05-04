@@ -76,7 +76,6 @@ class TeamFacultyCard extends StatelessWidget {
                       Text(
                         "${team.scores[gameFaculty.id]} Spielpunkte",
                         style: TextStyle(
-                          // textstyle: caption
                           fontWeight: FontWeight.w500,
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),

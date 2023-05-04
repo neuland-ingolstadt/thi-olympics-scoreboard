@@ -18,8 +18,6 @@ class GamesItem extends StatelessWidget {
 
     return Card(
       child: ListTile(
-        // contentPadding: const EdgeInsets.all(),
-        // leading: FacultyUtils.getCirlceAvatar(context, faculty),
         title: ListTitle(
           title: faculty.game,
           faculty: faculty,

@@ -22,7 +22,7 @@ Each Faculty can give each team as many game points for their own game, resultin
     firebase login
     ```
 - Install the [Flutter CLI](https://firebase.flutter.dev/docs/cli/) and activate it according to the documentation.
-- Run the following command to create the `firebase_options.json` file. This file is used to connect to the Firebase project.
+- Run the following command to create the `firebase_options.dart` file. This file is used to connect to the Firebase project.
     ```bash
     flutterfire configure
     ```

@@ -17,19 +17,44 @@ Each Faculty can give each team as many game points for their own game, resultin
 
 - Request access to the Firebase project from [Philipp Opheys](mailto:philipp.opheys@neuland-ingolstadt.de).
 - Install the [Firebase CLI](https://firebase.google.com/docs/cli).
-- Run `firebase login` to login to your Firebase account.
+- Login to your Firebase account.
+    ```bash
+    firebase login
+    ```
 - Install the [Flutter CLI](https://firebase.flutter.dev/docs/cli/) and activate it according to the documentation.
-- Run `flutterfire configure` to create the `firebase_options.json` file. This file is used to connect to the Firebase project.
+- Run the following command to create the `firebase_options.json` file. This file is used to connect to the Firebase project.
+    ```bash
+    flutterfire configure
+    ```
 
 ### Flutter
 
 - Install the [Flutter SDK](https://flutter.dev/docs/get-started/install).
-- Check your Flutter installation by running `flutter doctor`.
-- Use the `stable` channel by running `flutter channel stable`.
-- Run `flutter pub get` to install the dependencies.
-- Run `flutter run [-d Chrome]` to start the app.
+- Check your Flutter installation
+    ```bash
+    flutter doctor
+    ```
+- Switch to the `stable` channel
+    ```bash
+    flutter channel stable
+    flutter upgrade
+    ```
+- Install the dependencies
+    ```bash
+    flutter pub get
+    ```	
+- Run the app
+    ```bash
+    flutter run [-d Chrome]
+    ```	
 
 ## Deployment
 
-- Run `flutter build web --web-renderer canvaskit --release` to build the app.
-- Run `firebase deploy` to deploy the app to Firebase.
+- Build the app using CanvasKit in release mode
+    ```bash
+    flutter build web --web-renderer canvaskit --release
+    ```
+- Deploy the app to Firebase
+    ```bash
+    firebase deploy
+    ```

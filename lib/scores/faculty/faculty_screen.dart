@@ -20,7 +20,7 @@ class _FacultiesScreenState extends State<FacultiesScreen> {
     var ranks = GameUtils.getRankFromScores(globalScores);
 
     faculties = faculties.where((element) => element.scoresEnabled).toList();
-    faculties.sort((a, b) => (ranks[a.id]!).compareTo(ranks[b.id]!));
+    faculties.sort((a, b) => (ranks[a.id] ?? -1).compareTo(ranks[b.id] ?? -1));
 
     return Align(
       alignment: Alignment.topCenter,

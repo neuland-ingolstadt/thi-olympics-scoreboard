@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/models/models.dart';
 import 'package:scoreboard/scores/faculty/faculty_screen.dart';
+import 'package:scoreboard/scores/games/games_screen.dart';
 import 'package:scoreboard/services/firestore.dart';
 import 'package:scoreboard/settings/settings.dart';
 import 'package:scoreboard/shared/appbar.dart';
@@ -58,15 +59,16 @@ class _MainProviderState extends State<MainProvider> {
       selectedIcon: Icon(Icons.folder),
       label: 'Fachschaften',
     ),
-    // const SharedNavigationDestionation(
-    //   icon: Icon(Icons.settings_outlined),
-    //   selectedIcon: Icon(Icons.settings),
-    //   label: 'Einstellungen',
-    // ),
+    const SharedNavigationDestionation(
+      icon: Icon(Icons.videogame_asset_outlined),
+      selectedIcon: Icon(Icons.videogame_asset),
+      label: 'Spiele',
+    ),
   ];
   final screens = [
     const TeamsScreen(),
     const FacultiesScreen(),
+    const GamesScreen()
     // const LoginPage()
   ];
 
@@ -106,7 +108,7 @@ class _MainProviderState extends State<MainProvider> {
                     elevation: 1,
                     selectedIndex: index,
                     onDestinationSelected: (index) {
-                      if (index == 2) {
+                      if (index == screens.length) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(

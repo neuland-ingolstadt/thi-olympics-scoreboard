@@ -17,12 +17,12 @@ class MainProvider extends StatefulWidget {
   State<MainProvider> createState() => _MainProviderState();
 }
 
-class SharedNavigationDestionation {
+class SharedNavigationDestination {
   final Widget icon;
   final Widget selectedIcon;
   final String label;
 
-  const SharedNavigationDestionation({
+  const SharedNavigationDestination({
     required this.icon,
     required this.selectedIcon,
     required this.label,
@@ -49,17 +49,17 @@ class _MainProviderState extends State<MainProvider> {
   int index = 0;
 
   final destinations = [
-    const SharedNavigationDestionation(
+    const SharedNavigationDestination(
       icon: Icon(Icons.group_outlined),
       selectedIcon: Icon(Icons.group),
       label: 'Teams',
     ),
-    const SharedNavigationDestionation(
+    const SharedNavigationDestination(
       icon: Icon(Icons.folder_outlined),
       selectedIcon: Icon(Icons.folder),
       label: 'Fakultäten',
     ),
-    const SharedNavigationDestionation(
+    const SharedNavigationDestination(
       icon: Icon(Icons.videogame_asset_outlined),
       selectedIcon: Icon(Icons.videogame_asset),
       label: 'Spiele',
@@ -74,10 +74,10 @@ class _MainProviderState extends State<MainProvider> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: isDekstop(context)
+      appBar: isDesktop(context)
           ? null
           : getAppBar(context, 'Fachschaftsolympiade', true),
-      bottomNavigationBar: isDekstop(context)
+      bottomNavigationBar: isDesktop(context)
           ? null
           : NavigationBar(
               destinations:
@@ -100,7 +100,7 @@ class _MainProviderState extends State<MainProvider> {
             catchError: (_, __) => [Team()],
           ),
         ],
-        child: isDekstop(context)
+        child: isDesktop(context)
             ? Row(
                 children: [
                   NavigationDrawer(

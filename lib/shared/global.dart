@@ -4,6 +4,6 @@ import 'package:flutter/material.dart';
 
 const kLargeScreenBreakpoint = 700;
 
-bool isDekstop(BuildContext context) {
+bool isDesktop(BuildContext context) {
   return MediaQuery.of(context).size.width > kLargeScreenBreakpoint;
 }

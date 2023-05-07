@@ -35,12 +35,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future signIn(BuildContext context) async {
+    TextInput.finishAutofillContext();
+
     try {
       await AuthService().loginUser(
           emailController.text.trim(), passwordController.text.trim());
     } catch (e) {
       setState(() {
-        errorText = 'Die Emailadresse oder das Passwort ist falsch';
+        errorText = 'Die Email Adresse oder das Passwort ist falsch';
       });
     }
 
@@ -97,20 +99,21 @@ class _LoginPageState extends State<LoginPage> {
                             labelText: 'Password',
                           ),
                         ),
+                        const Padding(padding: EdgeInsets.all(10)),
+                        Text(
+                          errorText,
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.error),
+                        ),
+                        const Padding(padding: EdgeInsets.all(10)),
+                        ElevatedButton.icon(
+                          onPressed: () =>
+                              _isValidated ? signIn(context) : null,
+                          icon: const Icon(Icons.lock_outline),
+                          label: const Text('Login'),
+                        ),
                       ],
                     ),
-                  ),
-                  const Padding(padding: EdgeInsets.all(10)),
-                  Text(
-                    errorText,
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.error),
-                  ),
-                  const Padding(padding: EdgeInsets.all(10)),
-                  ElevatedButton.icon(
-                    onPressed: () => _isValidated ? signIn(context) : null,
-                    icon: const Icon(Icons.lock_outline),
-                    label: const Text('Login'),
                   ),
                 ],
               ),
@@ -120,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () async {
                 if (!_isValidated) {
                   setState(() {
-                    errorText = 'Bitte eine gültige Emailadresse eingeben';
+                    errorText = 'Bitte eine gültige Email Adresse eingeben';
                   });
                 } else {
                   try {

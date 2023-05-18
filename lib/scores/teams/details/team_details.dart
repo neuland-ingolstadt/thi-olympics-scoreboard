@@ -13,23 +13,25 @@ class TeamDetails extends StatelessWidget {
     var faculties = Provider.of<List<Faculty>>(context);
     faculties = faculties.where((f) => f.hasGame).toList();
 
-    return Scaffold(
-      appBar: getAppBar(context, team.name),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: faculties.length,
-              itemBuilder: (context, index) {
-                var faculty = faculties[index];
-                return TeamFacultyCard(
-                  gameFaculty: faculty,
-                  team: team,
-                );
-              },
+    return SafeArea(
+      child: Scaffold(
+        appBar: getAppBar(context, team.name),
+        body: Align(
+          alignment: Alignment.topCenter,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: faculties.length,
+                itemBuilder: (context, index) {
+                  var faculty = faculties[index];
+                  return TeamFacultyCard(
+                    gameFaculty: faculty,
+                    team: team,
+                  );
+                },
+              ),
             ),
           ),
         ),

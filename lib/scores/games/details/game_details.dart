@@ -18,26 +18,28 @@ class GameDetails extends StatelessWidget {
     teams.sort((a, b) =>
         (ranks[a.id] ?? ranks.length).compareTo(ranks[b.id] ?? ranks.length));
 
-    return Scaffold(
-      appBar: getAppBar(context, faculty.game),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: teams.length,
-              itemBuilder: (context, index) {
-                var team = teams[index];
-                return GameTeamItem(
-                  team: team,
-                  rank: ranks[team.id] ?? 0,
-                  globalScore: GameUtils.getPointsFromRank(ranks, team),
-                  gameScore: team.scores[faculty.id],
-                  gameFaculty: faculty,
-                );
-              },
+    return SafeArea(
+      child: Scaffold(
+        appBar: getAppBar(context, faculty.game),
+        body: Align(
+          alignment: Alignment.topCenter,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: teams.length,
+                itemBuilder: (context, index) {
+                  var team = teams[index];
+                  return GameTeamItem(
+                    team: team,
+                    rank: ranks[team.id] ?? 0,
+                    globalScore: GameUtils.getPointsFromRank(ranks, team),
+                    gameScore: team.scores[faculty.id],
+                    gameFaculty: faculty,
+                  );
+                },
+              ),
             ),
           ),
         ),

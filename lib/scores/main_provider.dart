@@ -73,90 +73,94 @@ class _MainProviderState extends State<MainProvider> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: isDesktop(context)
-          ? null
-          : getAppBar(context, 'Fachschaftsolympiade', true),
-      bottomNavigationBar: isDesktop(context)
-          ? null
-          : NavigationBar(
-              destinations:
-                  destinations.map((e) => e.toNavigationDestination()).toList(),
-              selectedIndex: index,
-              onDestinationSelected: (index) => setState(() {
-                this.index = index;
-              }),
+    return SafeArea(
+      child: Scaffold(
+        appBar: isDesktop(context)
+            ? null
+            : getAppBar(context, 'Fachschaftsolympiade', true),
+        bottomNavigationBar: isDesktop(context)
+            ? null
+            : NavigationBar(
+                destinations: destinations
+                    .map((e) => e.toNavigationDestination())
+                    .toList(),
+                selectedIndex: index,
+                onDestinationSelected: (index) => setState(() {
+                  this.index = index;
+                }),
+              ),
+        body: MultiProvider(
+          providers: [
+            StreamProvider<List<Faculty>>(
+              create: (_) => FirestoreService().getFacultiesAsStream(),
+              initialData: [Faculty()],
+              catchError: (_, __) => [Faculty()],
             ),
-      body: MultiProvider(
-        providers: [
-          StreamProvider<List<Faculty>>(
-            create: (_) => FirestoreService().getFacultiesAsStream(),
-            initialData: [Faculty()],
-            catchError: (_, __) => [Faculty()],
-          ),
-          StreamProvider<List<Team>>(
-            create: (_) => FirestoreService().getTeamsAsStream(),
-            initialData: [Team()],
-            catchError: (_, __) => [Team()],
-          ),
-        ],
-        child: isDesktop(context)
-            ? Row(
-                children: [
-                  NavigationDrawer(
-                    elevation: 1,
-                    selectedIndex: index,
-                    onDestinationSelected: (index) {
-                      if (index == screens.length) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SettingsPage(),
-                          ),
-                        );
+            StreamProvider<List<Team>>(
+              create: (_) => FirestoreService().getTeamsAsStream(),
+              initialData: [Team()],
+              catchError: (_, __) => [Team()],
+            ),
+          ],
+          child: isDesktop(context)
+              ? Row(
+                  children: [
+                    NavigationDrawer(
+                      elevation: 1,
+                      selectedIndex: index,
+                      onDestinationSelected: (index) {
+                        if (index == screens.length) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SettingsPage(),
+                            ),
+                          );
 
-                        return;
-                      }
+                          return;
+                        }
 
-                      setState(() {
-                        this.index = index;
-                      });
-                    },
-                    children: [
-                      const Padding(padding: EdgeInsets.only(top: 10)),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 15),
-                        child: Row(
-                          children: const [
-                            Image(
+                        setState(() {
+                          this.index = index;
+                        });
+                      },
+                      children: [
+                        const Padding(padding: EdgeInsets.only(top: 10)),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 15),
+                          child: Row(
+                            children: [
+                              Image(
                                 image: AssetImage(
                                   'studverthi.png',
                                 ),
-                                height: 35),
-                            Padding(padding: EdgeInsets.only(left: 10)),
-                            Text(
-                              'Fachschaftsolympiade',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                                height: 35,
+                              ),
+                              Padding(padding: EdgeInsets.only(left: 10)),
+                              Text(
+                                'Fachschaftsolympiade',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      ...destinations
-                          .map((e) => e.toNavigationDrawerDestination())
-                          .toList(),
-                      const NavigationDrawerDestination(
-                        icon: Icon(Icons.settings_rounded),
-                        selectedIcon: Icon(Icons.settings_rounded),
-                        label: Text('Einstellungen'),
-                      ),
-                    ],
-                  ),
-                  Expanded(child: screens[index]),
-                ],
-              )
-            : screens[index],
+                        ...destinations
+                            .map((e) => e.toNavigationDrawerDestination())
+                            .toList(),
+                        const NavigationDrawerDestination(
+                          icon: Icon(Icons.settings_rounded),
+                          selectedIcon: Icon(Icons.settings_rounded),
+                          label: Text('Einstellungen'),
+                        ),
+                      ],
+                    ),
+                    Expanded(child: screens[index]),
+                  ],
+                )
+              : screens[index],
+        ),
       ),
     );
   }

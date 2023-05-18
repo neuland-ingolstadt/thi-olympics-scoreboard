@@ -7,7 +7,7 @@ class FacultyUtils {
     return IconData(faculty.icon, fontFamily: 'MaterialIcons');
   }
 
-  static CircleAvatar getCirlceAvatar(BuildContext context, Faculty faculty) {
+  static CircleAvatar getCircleAvatar(BuildContext context, Faculty faculty) {
     return CircleAvatar(
       backgroundColor: Theme.of(context).colorScheme.onInverseSurface,
       foregroundColor: HexColor(faculty.color),

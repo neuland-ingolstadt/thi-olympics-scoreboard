@@ -22,24 +22,26 @@ class FacultyDetails extends StatelessWidget {
     teams.sort((a, b) =>
         (globalScores[b.id] ?? -1).compareTo(globalScores[a.id] ?? -1));
 
-    return Scaffold(
-      appBar: getAppBar(context, faculty.name),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: facultyTeams.length,
-              itemBuilder: (context, index) {
-                var team = facultyTeams[index];
-                return TeamItem(
-                  team: team,
-                  rank: ranks[team.id] ?? 0,
-                  score: globalScores[team.id] ?? 0,
-                );
-              },
+    return SafeArea(
+      child: Scaffold(
+        appBar: getAppBar(context, faculty.name),
+        body: Align(
+          alignment: Alignment.topCenter,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: facultyTeams.length,
+                itemBuilder: (context, index) {
+                  var team = facultyTeams[index];
+                  return TeamItem(
+                    team: team,
+                    rank: ranks[team.id] ?? 0,
+                    score: globalScores[team.id] ?? 0,
+                  );
+                },
+              ),
             ),
           ),
         ),

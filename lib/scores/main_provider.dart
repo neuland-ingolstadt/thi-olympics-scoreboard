@@ -124,16 +124,17 @@ class _MainProviderState extends State<MainProvider> {
                     },
                     children: [
                       const Padding(padding: EdgeInsets.only(top: 10)),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 15),
+                      const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                         child: Row(
-                          children: const [
+                          children: [
                             Image(
-                                image: AssetImage(
-                                  'studverthi.png',
-                                ),
-                                height: 35),
+                              image: AssetImage(
+                                'studverthi.png',
+                              ),
+                              height: 35,
+                            ),
                             Padding(padding: EdgeInsets.only(left: 10)),
                             Text(
                               'Fachschaftsolympiade',

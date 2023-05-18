@@ -3,6 +3,7 @@ import 'package:scoreboard/edit_scores/edit_scores_provider.dart';
 import 'package:scoreboard/login/login.dart';
 import 'package:scoreboard/shared/appbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../services/auth.dart';
 import '../services/config.dart';
@@ -15,11 +16,17 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  final Uri _uri = Uri.parse("https://neuland-ingolstadt.de/");
+
   @override
   Widget build(BuildContext context) {
     var headerSize = 16.0;
 
     var user = AuthService().user;
+
+    Future<void> launchURL() async {
+      await launchUrl(_uri);
+    }
 
     return Scaffold(
       appBar: getAppBar(context, 'Einstellungen', false),
@@ -168,6 +175,27 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                 ],
+              ),
+            ),
+            const Spacer(),
+            Align(
+              alignment: Alignment.center,
+              child: GestureDetector(
+                onTap: () {
+                  launchURL();
+                },
+                child: ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                    themeNotifier.isDark ? Colors.white : Colors.black,
+                    BlendMode.srcIn,
+                  ),
+                  child: const Image(
+                    image: AssetImage(
+                      'neuland.png',
+                    ),
+                    height: 75,
+                  ),
+                ),
               ),
             ),
           ],

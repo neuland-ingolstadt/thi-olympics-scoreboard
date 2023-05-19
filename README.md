@@ -62,7 +62,7 @@ Each Faculty can give each team as many game points for their own game, resultin
 - Build the app using CanvasKit in release mode
 
     ```bash
-    flutter build web --web-renderer canvaskit --release --no-tree-shake-icons
+    flutter build web --web-renderer canvaskit --release
     ```
 
 - Deploy the app to Firebase

@@ -206,18 +206,17 @@
     <script>
       window.addEventListener("load", function (ev) {
         // Download main.dart.js
-        _flutter.loader
-          .loadEntrypoint({
-            serviceWorker: {
-              serviceWorkerVersion: "{{flutter_service_worker_version}}",
-            },
-          })
-          .then(function (engineInitializer) {
-            return engineInitializer.initializeEngine();
-          })
-          .then(function (appRunner) {
-            return appRunner.runApp();
-          });
+        _flutter.loader.loadEntrypoint({
+          serviceWorker: {
+            serviceWorkerVersion: '{{flutter_service_worker_version}}',
+          },
+          onEntrypointLoaded: async function (engineInitializer) {
+            // Initialize the Flutter engine
+            let appRunner = await engineInitializer.initializeEngine();
+            // Run the app
+            await appRunner.runApp();
+          },
+        });
       });
     </script>
   </body>

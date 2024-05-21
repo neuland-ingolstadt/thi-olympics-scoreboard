@@ -77,7 +77,7 @@ class _MainProviderState extends State<MainProvider> {
       child: Scaffold(
         appBar: isDesktop(context)
             ? null
-            : getAppBar(context, 'Fachschaftsolympiade', true),
+            : getAppBar(context, 'Campus Olympics', true),
         bottomNavigationBar: isDesktop(context)
             ? null
             : NavigationBar(
@@ -133,13 +133,13 @@ class _MainProviderState extends State<MainProvider> {
                             children: [
                               Image(
                                 image: AssetImage(
-                                  'studverthi.png',
+                                  'logo.png',
                                 ),
                                 height: 35,
                               ),
                               Padding(padding: EdgeInsets.only(left: 10)),
                               Text(
-                                'Fachschaftsolympiade',
+                                'Campus Olympics',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),

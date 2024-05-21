@@ -1,4 +1,4 @@
-# THI Fachschaftsolympiade
+# THI Campus Olympics
 
 This is a WebApp made for the [Student Council Olympics](https://studverthi.de/fakultaetsolympiade) which is organized annually at the THI by the Student Council.
 

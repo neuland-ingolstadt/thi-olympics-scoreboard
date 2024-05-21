@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (_, snapshot) {
         return MaterialApp(
-          title: 'Fachschaftsolympiade',
+          title: 'Campus Olympics',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             colorSchemeSeed: const Color.fromARGB(255, 37, 89, 150),

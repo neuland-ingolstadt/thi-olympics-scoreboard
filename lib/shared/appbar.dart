@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import '../settings/settings.dart';
 
 AppBar getAppBar(BuildContext context, String title,
-    [bool settingsVisisble = true]) {
+    [bool settingsVisible = true]) {
   return AppBar(
     title: Row(
       children: [
         const Image(
             image: AssetImage(
-              'studverthi.png',
+              'logo.png',
             ),
             height: 35),
         const Padding(padding: EdgeInsets.only(left: 10)),
@@ -24,7 +24,7 @@ AppBar getAppBar(BuildContext context, String title,
     ),
     actions: [
       Visibility(
-        visible: settingsVisisble,
+        visible: settingsVisible,
         child: IconButton(
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {

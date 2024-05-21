@@ -1,11 +1,11 @@
 {
-    "name": "Fachschaftsolympiade",
-    "short_name": "Fachschaftsolympiade",
+    "name": "Campus Olympics",
+    "short_name": "Campus Olympics",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#fdfcff",
     "theme_color": "#fdfcff",
-    "description": "Scoreboard App für die Fachschaftsolympiade",
+    "description": "Scoreboard App für die Campus Olympics",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

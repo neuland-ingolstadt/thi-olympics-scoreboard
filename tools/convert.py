@@ -17,6 +17,7 @@ db = firestore.client()
 df = pd.read_excel(data_path)
 
 time_re = re.compile(r"(\d{2}):(\d{2})(\s{0,1})-(\s{0,1})(\d{2}):(\d{2})")
+team_re = re.compile(r"Team\s(\d{1,2})")
 
 
 def series_to_faculty(series):
@@ -44,10 +45,23 @@ def get_json(series):
     }
 
 
+def clean_name(series):
+    name, number, *_ = team_re.split(series["Team"])
+    name = re.sub(r"[^a-zA-Z0-9 ]", "", name).strip()
+
+    return f"Team {number} • {name}"
+
+
 df["faculty"] = df.apply(series_to_faculty, axis=1)
 time_columns = [col for col in df.columns if time_re.match(col)]
 df["times"] = df.apply(get_team_times, time_columns=time_columns, axis=1)
 df["id"] = df.apply(lambda _: str(uuid4()), axis=1)
+df["Team"] = df.apply(clean_name, axis=1)
+
+# clear the collection
+docs = db.collection("teams").stream()
+for doc in docs:
+    doc.reference.delete()
 
 for _, row in df.iterrows():
     doc = db.collection("teams").document(row["id"])

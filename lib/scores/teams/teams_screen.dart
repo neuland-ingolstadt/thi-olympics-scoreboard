@@ -30,6 +30,7 @@ class TeamsScreen extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(10),
           child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: teams.length,
             itemBuilder: (context, index) {

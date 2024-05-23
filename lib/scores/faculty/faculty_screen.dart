@@ -29,6 +29,7 @@ class _FacultiesScreenState extends State<FacultiesScreen> {
           padding: const EdgeInsets.all(10),
           child: ListView.builder(
             shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: faculties.length,
             itemBuilder: (context, index) {
               final faculty = faculties[index];

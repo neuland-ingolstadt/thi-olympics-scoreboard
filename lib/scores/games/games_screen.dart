@@ -24,6 +24,7 @@ class _GamesScreenState extends State<GamesScreen> {
         child: Container(
           padding: const EdgeInsets.all(10),
           child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: faculties.length,
             itemBuilder: (context, index) {

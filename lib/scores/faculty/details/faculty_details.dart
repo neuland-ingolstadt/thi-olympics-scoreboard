@@ -31,6 +31,7 @@ class FacultyDetails extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: facultyTeams.length,
                 itemBuilder: (context, index) {

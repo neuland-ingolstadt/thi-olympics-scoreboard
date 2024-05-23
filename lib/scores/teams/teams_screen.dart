@@ -16,8 +16,13 @@ class TeamsScreen extends StatelessWidget {
 
     faculties = faculties.where((element) => element.scoresEnabled).toList();
 
-    teams.sort((a, b) =>
-        (globalScores[b.id] ?? -1).compareTo(globalScores[a.id] ?? -1));
+    var allEmpty = globalScores.entries.every((element) => element.value == 0);
+    if (allEmpty) {
+      teams.sort((a, b) => a.faculty.compareTo(b.faculty));
+    } else {
+      teams.sort((a, b) =>
+          (globalScores[b.id] ?? -1).compareTo(globalScores[a.id] ?? -1));
+    }
 
     return Align(
       alignment: Alignment.topCenter,

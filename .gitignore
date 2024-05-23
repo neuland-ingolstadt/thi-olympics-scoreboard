@@ -49,3 +49,6 @@ app.*.map.json
 # Firebase
 .firebase/
 pubspec.lock
+
+# Credentials
+/tools/credentials.json

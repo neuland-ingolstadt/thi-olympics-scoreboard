@@ -18,32 +18,29 @@ class TeamsScreen extends StatelessWidget {
 
     var allEmpty = globalScores.entries.every((element) => element.value == 0);
     if (allEmpty) {
-      teams.sort((a, b) => a.faculty.compareTo(b.faculty));
+      teams.sort((a, b) {
+        var teamANumber = int.tryParse(a.name.split(' ')[1]) ?? 0;
+        var teamBNumber = int.tryParse(b.name.split(' ')[1]) ?? 0;
+
+        return teamANumber.compareTo(teamBNumber);
+      });
     } else {
       teams.sort((a, b) =>
           (globalScores[b.id] ?? -1).compareTo(globalScores[a.id] ?? -1));
     }
 
-    return Align(
-      alignment: Alignment.topCenter,
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: teams.length,
-            itemBuilder: (context, index) {
-              final team = teams[index];
-              return TeamItem(
-                team: team,
-                rank: ranks[team.id] ?? 0,
-                score: globalScores[team.id] ?? 0,
-              );
-            },
-          ),
-        ),
-      ),
+    return ListView.builder(
+      padding: const EdgeInsets.all(8.0),
+      shrinkWrap: true,
+      itemCount: teams.length,
+      itemBuilder: (context, index) {
+        final team = teams[index];
+        return TeamItem(
+          team: team,
+          rank: ranks[team.id] ?? 0,
+          score: globalScores[team.id] ?? 0,
+        );
+      },
     );
   }
 }

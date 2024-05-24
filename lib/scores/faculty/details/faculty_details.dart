@@ -25,26 +25,18 @@ class FacultyDetails extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: getAppBar(context, faculty.name),
-        body: Align(
-          alignment: Alignment.topCenter,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: facultyTeams.length,
-                itemBuilder: (context, index) {
-                  var team = facultyTeams[index];
-                  return TeamItem(
-                    team: team,
-                    rank: ranks[team.id] ?? 0,
-                    score: globalScores[team.id] ?? 0,
-                  );
-                },
-              ),
-            ),
-          ),
+        body: ListView.builder(
+          padding: const EdgeInsets.all(8.0),
+          shrinkWrap: true,
+          itemCount: facultyTeams.length,
+          itemBuilder: (context, index) {
+            var team = facultyTeams[index];
+            return TeamItem(
+              team: team,
+              rank: ranks[team.id] ?? 0,
+              score: globalScores[team.id] ?? 0,
+            );
+          },
         ),
       ),
     );

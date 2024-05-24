@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../settings/settings.dart';
 
 AppBar getAppBar(BuildContext context, String title,
     [bool settingsVisible = true]) {
+  var backShown = Navigator.of(context).canPop();
+
   return AppBar(
     title: Row(
       children: [
-        const Image(
-            image: AssetImage(
-              'logo.png',
-            ),
-            height: 35),
-        const Padding(padding: EdgeInsets.only(left: 10)),
+        Visibility(
+          visible: !backShown,
+          child: const Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Image(
+                image: AssetImage(
+                  'logo.png',
+                ),
+                height: 35),
+          ),
+        ),
         Flexible(
           child: Text(
             title,

@@ -82,7 +82,6 @@ class GameTeamItem extends StatelessWidget {
             return TeamDetailsProvider(team: team);
           }));
         },
-        tileColor: Theme.of(context).colorScheme.surfaceVariant,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(10),

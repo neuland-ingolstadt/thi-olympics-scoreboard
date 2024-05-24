@@ -22,27 +22,19 @@ class _FacultiesScreenState extends State<FacultiesScreen> {
     faculties = faculties.where((element) => element.scoresEnabled).toList();
     faculties.sort((a, b) => (ranks[a.id] ?? -1).compareTo(ranks[b.id] ?? -1));
 
-    return Align(
-      alignment: Alignment.topCenter,
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: faculties.length,
-            itemBuilder: (context, index) {
-              final faculty = faculties[index];
+    return ListView.builder(
+      shrinkWrap: true,
+      padding: const EdgeInsets.all(8.0),
+      itemCount: faculties.length,
+      itemBuilder: (context, index) {
+        final faculty = faculties[index];
 
-              return FacultyItem(
-                rank: ranks[faculty.id] ?? 0,
-                score: globalScores[faculty.id] ?? 0,
-                faculty: faculty,
-              );
-            },
-          ),
-        ),
-      ),
+        return FacultyItem(
+          rank: ranks[faculty.id] ?? 0,
+          score: globalScores[faculty.id] ?? 0,
+          faculty: faculty,
+        );
+      },
     );
   }
 }

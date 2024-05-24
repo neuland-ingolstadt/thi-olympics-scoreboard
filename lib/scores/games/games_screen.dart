@@ -18,25 +18,17 @@ class _GamesScreenState extends State<GamesScreen> {
     faculties = faculties.where((element) => element.hasGame).toList();
     faculties.sort((a, b) => a.name.compareTo(b.name));
 
-    return Align(
-      alignment: Alignment.topCenter,
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: faculties.length,
-            itemBuilder: (context, index) {
-              final faculty = faculties[index];
+    return ListView.builder(
+      padding: const EdgeInsets.all(8.0),
+      shrinkWrap: true,
+      itemCount: faculties.length,
+      itemBuilder: (context, index) {
+        final faculty = faculties[index];
 
-              return GamesItem(
-                faculty: faculty,
-              );
-            },
-          ),
-        ),
-      ),
+        return GamesItem(
+          faculty: faculty,
+        );
+      },
     );
   }
 }

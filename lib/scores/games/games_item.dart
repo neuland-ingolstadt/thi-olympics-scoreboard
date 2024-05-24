@@ -29,7 +29,6 @@ class GamesItem extends StatelessWidget {
           }));
         },
         subtitle: Text('$playedTeams / ${teams.length} Teams'),
-        tileColor: Theme.of(context).colorScheme.surfaceVariant,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(10),

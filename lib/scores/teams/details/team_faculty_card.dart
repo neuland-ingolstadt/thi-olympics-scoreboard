@@ -100,7 +100,6 @@ class TeamFacultyCard extends StatelessWidget {
             ),
           ],
         ),
-        tileColor: Theme.of(context).colorScheme.surfaceVariant,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(10),

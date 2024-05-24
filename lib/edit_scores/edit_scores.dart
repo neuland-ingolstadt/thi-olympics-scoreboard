@@ -119,7 +119,6 @@ class _EditScoresState extends State<EditScores> {
                             },
                           );
                         },
-                        tileColor: Theme.of(context).colorScheme.surfaceVariant,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(10),

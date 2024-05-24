@@ -16,25 +16,17 @@ class TeamDetails extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: getAppBar(context, team.name),
-        body: Align(
-          alignment: Alignment.topCenter,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: faculties.length,
-                itemBuilder: (context, index) {
-                  var faculty = faculties[index];
-                  return TeamFacultyCard(
-                    gameFaculty: faculty,
-                    team: team,
-                  );
-                },
-              ),
-            ),
-          ),
+        body: ListView.builder(
+          padding: const EdgeInsets.all(8.0),
+          shrinkWrap: true,
+          itemCount: faculties.length,
+          itemBuilder: (context, index) {
+            var faculty = faculties[index];
+            return TeamFacultyCard(
+              gameFaculty: faculty,
+              team: team,
+            );
+          },
         ),
       ),
     );

@@ -21,28 +21,20 @@ class GameDetails extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: getAppBar(context, faculty.game),
-        body: Align(
-          alignment: Alignment.topCenter,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: teams.length,
-                itemBuilder: (context, index) {
-                  var team = teams[index];
-                  return GameTeamItem(
-                    team: team,
-                    rank: ranks[team.id] ?? 0,
-                    globalScore: GameUtils.getPointsFromRank(ranks, team),
-                    gameScore: team.scores[faculty.id],
-                    gameFaculty: faculty,
-                  );
-                },
-              ),
-            ),
-          ),
+        body: ListView.builder(
+          padding: const EdgeInsets.all(8.0),
+          shrinkWrap: true,
+          itemCount: teams.length,
+          itemBuilder: (context, index) {
+            var team = teams[index];
+            return GameTeamItem(
+              team: team,
+              rank: ranks[team.id] ?? 0,
+              globalScore: GameUtils.getPointsFromRank(ranks, team),
+              gameScore: team.scores[faculty.id],
+              gameFaculty: faculty,
+            );
+          },
         ),
       ),
     );
